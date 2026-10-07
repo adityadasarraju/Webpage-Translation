@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <title>TAMU Full-Page Comic Translator</title>
+
+  <link
+    rel="stylesheet"
+    href="popup.css"
+  >
+</head>
+
+<body>
+  <main>
+    <header>
+      <h1>Full-Page Comic Translator</h1>
+
+      <p class="description">
+        Automatically scroll through the page and translate visible dialogue
+        into English overlays.
+      </p>
+    </header>
+
+    <label for="apiKey">
+      TAMU AI API key
+    </label>
+
+    <div class="key-row">
+      <input
+        id="apiKey"
+        type="password"
+        placeholder="Enter your TAMU AI API key"
+        autocomplete="off"
+        spellcheck="false"
+      >
+
+      <button
+        id="toggleKeyButton"
+        class="secondary compact"
+        type="button"
+      >
+        Show
+      </button>
+    </div>
+
+    <label for="model">
+      Image-input model
+    </label>
+
+    <select id="model">
+      <optgroup label="Recommended">
+        <option
+          value="protected.gemini-2.5-flash"
+          selected
+        >
+          Gemini 2.5 Flash
+        </option>
+
+        <option value="protected.gpt-4o">
+          GPT-4o
+        </option>
+
+        <option value="protected.gpt-4.1">
+          GPT-4.1
+        </option>
+
+        <option value="protected.gpt-4.1-mini">
+          GPT-4.1 Mini
+        </option>
+
+        <option value="protected.gemini-2.5-pro">
+          Gemini 2.5 Pro
+        </option>
+      </optgroup>
+
+      <optgroup label="Additional models">
+        <option value="protected.gemini-2.5-flash-lite">
+          Gemini 2.5 Flash Lite
+        </option>
+
+        <option value="protected.gemini-3.1-flash-lite">
+          Gemini 3.1 Flash Lite
+        </option>
+
+        <option value="protected.gemini-3.5-flash">
+          Gemini 3.5 Flash
+        </option>
+
+        <option value="protected.Claude Sonnet 4">
+          Claude Sonnet 4
+        </option>
+
+        <option value="protected.Claude Sonnet 4.5">
+          Claude Sonnet 4.5
+        </option>
+
+        <option value="protected.Claude Sonnet 4.6">
+          Claude Sonnet 4.6
+        </option>
+      </optgroup>
+    </select>
+
+    <p class="help">
+      Gemini 2.5 Flash, GPT-4o, GPT-4.1, and other listed models are
+      available through the supplied TAMU model endpoint [1]. Actual
+      image-input and bounding-box accuracy may vary.
+    </p>
+
+    <div class="opacity-heading">
+      <label for="opacity">
+        Overlay opacity
+      </label>
+
+      <output
+        id="opacityValue"
+        for="opacity"
+      >
+        82%
+      </output>
+    </div>
+
+    <input
+      id="opacity"
+      type="range"
+      min="0"
+      max="100"
+      step="1"
+      value="82"
+    >
+
+    <label class="checkbox-row">
+      <input
+        id="proofreader"
+        type="checkbox"
+      >
+
+      <span>
+        <strong>AI proofreader</strong>
+        <small>Improve grammar and natural phrasing.</small>
+      </span>
+    </label>
+
+    <div class="warning">
+      <strong>Maximum: 200 viewport captures</strong>
+
+      <span>
+        Each viewport can create a separate TAMU AI request. Keep this tab
+        active and avoid interacting with the page until scanning finishes.
+      </span>
+    </div>
+
+    <button
+      id="translateButton"
+      class="primary"
+      type="button"
+    >
+      Translate entire page
+    </button>
+
+    <button
+      id="cancelButton"
+      class="danger"
+      type="button"
+      disabled
+    >
+      Cancel translation
+    </button>
+
+    <button
+      id="clearButton"
+      class="secondary full-width"
+      type="button"
+    >
+      Clear overlays
+    </button>
+
+    <div
+      id="progressContainer"
+      class="progress-container"
+      hidden
+    >
+      <div class="progress-track">
+        <div id="progressBar"></div>
+      </div>
+
+      <p id="progressText">
+        Preparing…
+      </p>
+    </div>
+
+    <p
+      id="status"
+      role="status"
+      aria-live="polite"
+    ></p>
+
+    <p class="privacy">
+      Screenshots of the webpage are sent directly to chat-api.tamu.ai.
+      Your API key is kept in Chrome session storage.
+    </p>
+  </main>
+
+  <script src="popup.js"></script>
+</body>
+</html>
