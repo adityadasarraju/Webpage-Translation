@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "TAMU Full-Page Comic Translator",
+  "version": "2.0.0",
+  "description": "Automatically scan and translate comic text across an entire webpage using TAMU AI.",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage",
+    "tabs"
+  ],
+  "host_permissions": [
+    "https://chat-api.tamu.ai/*"
+  ],
+  "action": {
+    "default_title": "TAMU Full-Page Comic Translator",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  }
+}
